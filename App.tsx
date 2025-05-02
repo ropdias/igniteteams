@@ -1,5 +1,5 @@
-import { Groups } from './src/screens/Groups';
+import { Groups } from './src/screens/Groups'
 
 export default function App() {
-  return <Groups />;
+  return <Groups />
 }
