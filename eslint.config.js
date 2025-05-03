@@ -9,4 +9,9 @@ module.exports = defineConfig([
   {
     ignores: ['dist/*'],
   },
+  {
+    rules: {
+      'import/no-named-as-default': 'off',
+    },
+  },
 ])
