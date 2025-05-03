@@ -11,7 +11,9 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@expo-google-fonts/roboto": "^0.3.0",
     "expo": "~53.0.5",
+    "expo-font": "~13.3.1",
     "expo-status-bar": "~2.2.3",
     "patch-package": "^8.0.0",
     "postinstall-postinstall": "^2.1.0",
