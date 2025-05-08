@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { FlatList, Alert, TextInput } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 
@@ -70,7 +70,7 @@ export function Players() {
     }
   }
 
-  async function fetchPlayersByTeam() {
+  const fetchPlayersByTeam = useCallback(async () => {
     try {
       setIsLoading(true)
       const playersByTeam = await playersGetByGroupAndTeam(group, team)
@@ -84,7 +84,7 @@ export function Players() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [group, team])
 
   async function handlePlayerRemove(playerName: string) {
     try {
@@ -117,7 +117,7 @@ export function Players() {
 
   useEffect(() => {
     fetchPlayersByTeam()
-  }, [team])
+  }, [fetchPlayersByTeam])
 
   return (
     <Container>
