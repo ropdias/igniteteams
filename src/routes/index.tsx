@@ -9,6 +9,7 @@ export function Routes() {
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.GRAY_600 }}>
+      {/* View wrapper is to prevent white screen glitch when navigating between routes */}
       <NavigationContainer>
         <AppRoutes />
       </NavigationContainer>
