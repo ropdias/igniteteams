@@ -39,7 +39,9 @@ export function Groups() {
     navigation.navigate('players', { group })
   }
 
-  // useFocusEffect is a hook that is used to fetch groups when the screen is focused
+  // if we use useEffect, the groups will be fetched when the screen is mounted,
+  // but not when the screen is focused, so we use useFocusEffect to fetch groups
+  // when the screen is focused
   useFocusEffect(
     useCallback(() => {
       fetchGroups()
