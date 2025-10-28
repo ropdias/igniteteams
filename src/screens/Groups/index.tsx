@@ -40,9 +40,11 @@ export function Groups() {
   }
 
   // if we use useEffect, the groups will be fetched when the screen is mounted,
-  // but not when the screen is focused, so we use useFocusEffect to fetch groups
-  // when the screen is focused
+  // but not when the screen is focused (or when we navigate to another screen and then back),
+  // so we use useFocusEffect to fetch groups.
   useFocusEffect(
+    // useCallback is used to memoize the fetchGroups function,
+    // so it doesn't recreate the function on every render
     useCallback(() => {
       fetchGroups()
     }, []),
