@@ -29,7 +29,7 @@ type RouteParams = {
 export function Players() {
   const [isLoading, setIsLoading] = useState(true)
   const [newPlayerName, setNewPlayerName] = useState('')
-  const [team, setTeam] = useState('Time A')
+  const [team, setTeam] = useState('Team A')
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([])
 
   const navigation = useNavigation()
@@ -42,10 +42,7 @@ export function Players() {
 
   async function handleAddPlayer() {
     if (newPlayerName.trim().length === 0) {
-      return Alert.alert(
-        'Nova pessoa',
-        'Informe o nome da pessoa para adicionar.',
-      )
+      return Alert.alert('New player', "Enter the player's name to add.")
     }
 
     const newPlayer = {
@@ -62,10 +59,10 @@ export function Players() {
       await fetchPlayersByTeam()
     } catch (error) {
       if (error instanceof AppError) {
-        Alert.alert('Nova pessoa', error.message)
+        Alert.alert('New player', error.message)
       } else {
         console.log(error)
-        Alert.alert('Nova pessoa', 'Não foi possível adicionar.')
+        Alert.alert('New player', 'Could not add the player.')
       }
     }
   }
@@ -78,8 +75,8 @@ export function Players() {
     } catch (error) {
       console.log(error)
       Alert.alert(
-        'Pessoas',
-        'Não foi possível carregar as pessoas do time selecionado.',
+        'Players',
+        'Could not load the players for the selected team.',
       )
     } finally {
       setIsLoading(false)
@@ -94,7 +91,7 @@ export function Players() {
     } catch (error) {
       console.log(error)
 
-      Alert.alert('Remover pessoa', 'Não foi possível remover essa pessoa.')
+      Alert.alert('Remove player', 'Could not remove this player.')
     }
   }
 
@@ -104,31 +101,34 @@ export function Players() {
       navigation.navigate('groups')
     } catch (error) {
       console.log(error)
-      Alert.alert('Remover Grupo', 'Não foi posível remover o grupo')
+      Alert.alert('Remove Group', 'Could not remove the group')
     }
   }
 
   async function handleGroupRemove() {
-    Alert.alert('Remover', 'Deseja remover a turma?', [
-      { text: 'Não', style: 'cancel' },
-      { text: 'Sim', onPress: () => groupRemove() },
+    Alert.alert('Remove', 'Do you want to remove the group?', [
+      { text: 'No', style: 'cancel' },
+      { text: 'Yes', onPress: () => groupRemove() },
     ])
   }
 
   useEffect(() => {
     fetchPlayersByTeam()
-  }, [fetchPlayersByTeam])
+  }, [fetchPlayersByTeam, team])
 
   return (
     <Container>
       <Header showBackButton />
 
-      <Highlight title={group} subtitle="adicione a galera e separe os times" />
+      <Highlight
+        title={group}
+        subtitle="add people and split them into teams"
+      />
 
       <Form>
         <Input
           inputRef={newPlayerNameInputRef}
-          placeholder="Nome da pessoa"
+          placeholder="Player name"
           value={newPlayerName}
           onChangeText={setNewPlayerName}
           autoCorrect={false}
@@ -141,7 +141,7 @@ export function Players() {
 
       <HeaderList>
         <FlatList
-          data={['Time A', 'Time B']}
+          data={['Team A', 'Team B']}
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
             <Filter
@@ -169,7 +169,7 @@ export function Players() {
             />
           )}
           ListEmptyComponent={() => (
-            <ListEmpty message="Não há pessoas nesse time" />
+            <ListEmpty message="No players in this team" />
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={[
@@ -180,7 +180,7 @@ export function Players() {
       )}
 
       <Button
-        title="Remover turma"
+        title="Remove group"
         type="SECONDARY"
         onPress={handleGroupRemove}
       />
