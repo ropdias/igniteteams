@@ -11,7 +11,7 @@ export async function groupCreate(newGroup: string) {
     const groupAlreadyExists = storedGroups.includes(newGroup)
 
     if (groupAlreadyExists) {
-      throw new AppError('A group with this name already exists.')
+      throw new AppError('A team with this name already exists.')
     }
 
     const storage = JSON.stringify([...storedGroups, newGroup])

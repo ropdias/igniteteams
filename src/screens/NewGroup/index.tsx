@@ -20,15 +20,15 @@ export function NewGroup() {
   async function handleNew() {
     try {
       if (group.trim().length === 0) {
-        return Alert.alert('New Group', 'Enter the group name.')
+        return Alert.alert('New Team', 'Enter the team name.')
       }
       await groupCreate(group)
       navigation.navigate('players', { group })
     } catch (error) {
       if (error instanceof AppError) {
-        Alert.alert('New Group', error.message)
+        Alert.alert('New Team', error.message)
       } else {
-        Alert.alert('New Group', 'Could not create a new group.')
+        Alert.alert('New Team', 'Could not create a new team.')
         console.log(error)
       }
     }
@@ -41,12 +41,9 @@ export function NewGroup() {
       <Content>
         <Icon />
 
-        <Highlight
-          title="New group"
-          subtitle="create the group to add people"
-        />
+        <Highlight title="New team" subtitle="Create the team to add people" />
 
-        <Input placeholder="Group name" onChangeText={setGroup} />
+        <Input placeholder="Team name" onChangeText={setGroup} />
 
         <Button title="Create" style={{ marginTop: 20 }} onPress={handleNew} />
       </Content>

@@ -28,7 +28,7 @@ export function Groups() {
       const data = await groupsGetAll()
       setGroups(data)
     } catch (error) {
-      Alert.alert('Groups', 'Could not load the groups')
+      Alert.alert('Teams', 'Could not load the teams')
       console.log(error)
     } finally {
       setIsLoading(false)
@@ -53,7 +53,7 @@ export function Groups() {
   return (
     <Container>
       <Header />
-      <Highlight title="Groups" subtitle="play with your group" />
+      <Highlight title="Teams" subtitle="Play with your team" />
       {isLoading ? (
         <Loading />
       ) : (
@@ -65,12 +65,12 @@ export function Groups() {
           )}
           contentContainerStyle={groups.length === 0 && { flex: 1 }}
           ListEmptyComponent={() => (
-            <ListEmpty message="How about creating your first group?" />
+            <ListEmpty message="How about creating your first team?" />
           )}
           showsVerticalScrollIndicator={false}
         />
       )}
-      <Button title="Create new group" onPress={handleNewGroup} />
+      <Button title="Create new team" onPress={handleNewGroup} />
     </Container>
   )
 }

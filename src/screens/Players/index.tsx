@@ -101,12 +101,12 @@ export function Players() {
       navigation.navigate('groups')
     } catch (error) {
       console.log(error)
-      Alert.alert('Remove Group', 'Could not remove the group')
+      Alert.alert('Remove Team', 'Could not remove the team.')
     }
   }
 
   async function handleGroupRemove() {
-    Alert.alert('Remove', 'Do you want to remove the group?', [
+    Alert.alert('Remove', 'Do you want to remove the team?', [
       { text: 'No', style: 'cancel' },
       { text: 'Yes', onPress: () => groupRemove() },
     ])
@@ -122,7 +122,7 @@ export function Players() {
 
       <Highlight
         title={group}
-        subtitle="add people and split them into teams"
+        subtitle="Add people and split them into teams"
       />
 
       <Form>
@@ -180,7 +180,7 @@ export function Players() {
       )}
 
       <Button
-        title="Remove group"
+        title="Remove team"
         type="SECONDARY"
         onPress={handleGroupRemove}
       />
